@@ -54,7 +54,7 @@ function checkCampaigns(accountName){
 }
 
 function sendEmail(email, body, accountName){
-  var subject = "Hola, hay cuentas que tienen campañas cercanas al Presupuesto Diario.";
+  var subject = "Hola, hay cuentas que tienen campañas cercanas al Presupuesto Diario (" + (CLOSEPER * 100) + "%)";
   Logger.log("Email enviado, asunto: " + subject);
   MailApp.sendEmail(email, subject, body);
 }
