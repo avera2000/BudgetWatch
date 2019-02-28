@@ -3,11 +3,11 @@ var CLOSEPER = 0.8; // porcentaje del presupuesto 0.8 ~ 90%
 var fullCampList = "";
 
 function main(){
-  var accounts = MccApp.accounts().withIds(['000-000-0000']).get(); //IDs de las cuentas a obtener, entre comillas simples, separadas por comas, cuidar los corchetes.
+  var accounts = AdsManagerApp.accounts().withIds(['000-000-0000']).get(); //IDs de las cuentas a obtener, entre comillas simples, separadas por comas, cuidar los corchetes.
   while (accounts.hasNext()) {
     var thisAccount = accounts.next();
     var accountName = thisAccount.getName();
-    MccApp.select(thisAccount);
+    AdsManagerApp.select(thisAccount);
     fullCampList = checkCampaigns(accountName);
   }
   if(fullCampList.length != 0){
@@ -18,7 +18,7 @@ function main(){
 }
 
 function checkCampaigns(accountName){
-  var campaigns = AdWordsApp.campaigns().withCondition('Status = ENABLED').get();
+  var campaigns = AdsApp.campaigns().withCondition('Status = ENABLED').get();
   var campList = "";
   while (campaigns.hasNext()) {
     var thisCampaign = campaigns.next();
@@ -31,7 +31,7 @@ function checkCampaigns(accountName){
       campList += "Campaña: " + name + "\nPresupuesto: " + formatNumber(budget) + "\nGastado: " + formatNumber(spend) + "\n\n";
     }
   }
-  var shoppingCampaigns = AdWordsApp.shoppingCampaigns().withCondition('Status = ENABLED').get();
+  var shoppingCampaigns = AdsApp.shoppingCampaigns().withCondition('Status = ENABLED').get();
   var shopCampList = "";
   while (shoppingCampaigns.hasNext()) {
     var thisCampaign2 = shoppingCampaigns.next();
